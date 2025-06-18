@@ -14,7 +14,7 @@ applications:
 
   # CONNECTIVITY LINK
   - name: rhcl
-    enabled: false
+    enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
