@@ -14,7 +14,7 @@ applications:
     values:
       operators:
       - channel: stable
-        installPlanApproval: Manual
+        installPlanApproval: Automatic
         name: servicemesh3
         source: redhat-operators
         sourceNamespace: openshift-marketplace
@@ -30,7 +30,7 @@ applications:
     values:
       operators:
       - channel: stable
-        installPlanApproval: Manual
+        installPlanApproval: Automatic
         name: kiali-ossm
         source: redhat-operators
         sourceNamespace: openshift-marketplace
