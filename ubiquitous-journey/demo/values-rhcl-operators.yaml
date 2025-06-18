@@ -28,51 +28,53 @@ applications:
         sourceNamespace: openshift-marketplace
         #csv: rhcl-operator.v1.0.2
 
-  # AUTHORINO
-  - name: authorino-operator
-    enabled: false
-    source: https://github.com/redhat-cop/helm-charts.git
-    source_path: charts/operators-installer
-    source_ref: main
-    destination: openshift-operators
-    values:
-      operators:
-      - channel: stable
-        installPlanApproval: Manual
-        name: authorino-operator-stable-redhat-operators-openshift-marketplace
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-        csv: authorino-operator.v1.2.2
+  # NOT NEEDED APPARENTLY
+  #
+  # # AUTHORINO
+  # - name: authorino-operator
+  #   enabled: false
+  #   source: https://github.com/redhat-cop/helm-charts.git
+  #   source_path: charts/operators-installer
+  #   source_ref: main
+  #   destination: openshift-operators
+  #   values:
+  #     operators:
+  #     - channel: stable
+  #       installPlanApproval: Automatic
+  #       name: authorino-operator-stable-redhat-operators-openshift-marketplace
+  #       source: redhat-operators
+  #       sourceNamespace: openshift-marketplace
+  #       #csv: authorino-operator.v1.2.2
 
-  # DNS OPERATOR
-  - name: dns-operator
-    enabled: false
-    source: https://github.com/redhat-cop/helm-charts.git
-    source_path: charts/operators-installer
-    source_ref: main
-    destination: openshift-operators
-    values:
-      operators:
-      - channel: stable
-        installPlanApproval: Manual
-        name: dns-operator-stable-redhat-operators-openshift-marketplace
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-        csv: dns-operator.v1.1.0 
+  # # DNS OPERATOR
+  # - name: dns-operator
+  #   enabled: false
+  #   source: https://github.com/redhat-cop/helm-charts.git
+  #   source_path: charts/operators-installer
+  #   source_ref: main
+  #   destination: openshift-operators
+  #   values:
+  #     operators:
+  #     - channel: stable
+  #       installPlanApproval: Automatic
+  #       name: dns-operator-stable-redhat-operators-openshift-marketplace
+  #       source: redhat-operators
+  #       sourceNamespace: openshift-marketplace
+  #       #csv: dns-operator.v1.1.0 
 
-  # LIMITADOR OPERATOR
-  - name: limitador-operator
-    enabled: false
-    source: https://github.com/redhat-cop/helm-charts.git
-    source_path: charts/operators-installer
-    source_ref: main
-    destination: openshift-operators
-    values:
-      operators:
-      - channel: stable
-        installPlanApproval: Manual
-        name: limitador-operator-stable-redhat-operators-openshift-marketplace
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-        csv: limitador-operator.v1.1.0
+  # # LIMITADOR OPERATOR
+  # - name: limitador-operator
+  #   enabled: false
+  #   source: https://github.com/redhat-cop/helm-charts.git
+  #   source_path: charts/operators-installer
+  #   source_ref: main
+  #   destination: openshift-operators
+  #   values:
+  #     operators:
+  #     - channel: stable
+  #       installPlanApproval: Automatic
+  #       name: limitador-operator-stable-redhat-operators-openshift-marketplace
+  #       source: redhat-operators
+  #       sourceNamespace: openshift-marketplace
+  #       #csv: limitador-operator.v1.1.0
 
