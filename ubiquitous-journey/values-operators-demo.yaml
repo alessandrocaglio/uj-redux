@@ -7,7 +7,7 @@ applications:
    # servicemesh3
   - name: servicemesh3
     enabled: true
-    source: https://gitlab.alpha.internal/openshift/redhat-cop.git
+    source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
     destination: openshift-operators
