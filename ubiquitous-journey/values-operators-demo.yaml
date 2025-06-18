@@ -6,7 +6,7 @@ ci_cd_namespace: &ci_cd gitops
 applications:
    # servicemesh3
   - name: servicemeshoperator3
-    enabled: false
+    enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
@@ -31,7 +31,7 @@ applications:
       operators:
       - channel: stable
         installPlanApproval: Manual
-        name: kiali-operator
+        name: kiali-ossm
         source: redhat-operators
         sourceNamespace: openshift-marketplace
         csv: kiali-operator.v2.4.5
