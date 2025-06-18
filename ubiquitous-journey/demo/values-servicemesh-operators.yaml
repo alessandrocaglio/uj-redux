@@ -18,7 +18,7 @@ applications:
         name: servicemeshoperator3
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        csv: servicemeshoperator3.v3.0.2
+        #csv: servicemeshoperator3.v3.0.2
 
   # Kiali
   - name: kiali
@@ -34,6 +34,6 @@ applications:
         name: kiali-ossm
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        csv: kiali-operator.v2.4.5
+        #csv: kiali-operator.v2.4.5
 
 

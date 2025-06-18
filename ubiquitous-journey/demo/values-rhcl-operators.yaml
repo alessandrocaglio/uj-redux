@@ -26,7 +26,7 @@ applications:
         name: rhcl-operator
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        csv: rhcl-operator.v1.0.2
+        #csv: rhcl-operator.v1.0.2
 
   # AUTHORINO
   - name: authorino-operator
