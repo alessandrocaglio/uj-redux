@@ -36,7 +36,13 @@ applications:
         sourceNamespace: openshift-marketplace
         csv: kiali-operator.v2.4.5
 
-
+  - name: getway-api
+    enabled: true
+    source: https://github.com/kubernetes-sigs/gateway-api.git
+    source_path: config/crd
+    source_ref: v1.1.0
+    destination: openshift-operators
+   
   # # cert-manager operator
   # - name: cert-manager-operator
   #   enabled: true
