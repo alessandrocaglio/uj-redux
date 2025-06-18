@@ -1,0 +1,6 @@
+# Ansible managed
+# global vars
+ci_cd_namespace: &ci_cd gitops
+
+# App of applications list
+applications: []

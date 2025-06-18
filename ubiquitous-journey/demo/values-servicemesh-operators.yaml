@@ -1,0 +1,145 @@
+# Ansible managed
+# global vars
+ci_cd_namespace: &ci_cd gitops
+
+# App of applications list
+applications:
+   # servicemesh3
+  - name: servicemeshoperator3
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: servicemeshoperator3
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: servicemeshoperator3.v3.0.2
+
+  # Kiali
+  - name: kiali
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: kiali-ossm
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: kiali-operator.v2.4.5
+
+  # GATEWAY API v1.1.0 CRDs
+  - name: getway-api
+    enabled: true
+    source: https://github.com/kubernetes-sigs/gateway-api.git
+    source_path: config/crd
+    source_ref: v1.1.0
+    destination: openshift-operators
+
+  # CONNECTIVITY LINK
+  - name: rhcl
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: rhcl-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: rhcl-operator.v1.0.2
+
+  # AUTHORINO
+  - name: authorino-operator
+    enabled: false
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: authorino-operator-stable-redhat-operators-openshift-marketplace
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: authorino-operator.v1.2.2
+
+  # DNS OPERATOR
+  - name: dns-operator
+    enabled: false
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: dns-operator-stable-redhat-operators-openshift-marketplace
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: dns-operator.v1.1.0 
+
+  # LIMITADOR OPERATOR
+  - name: limitador-operator
+    enabled: false
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: limitador-operator-stable-redhat-operators-openshift-marketplace
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: limitador-operator.v1.1.0
+
+
+  # # cert-manager operator
+  # - name: cert-manager-operator
+  #   enabled: true
+  #   source: https://github.com/redhat-cop/helm-charts.git
+  #   source_path: charts/operators-installer
+  #   source_ref: main
+  #   destination: openshift-operators
+  #   values:
+  #     operators:
+  #     - channel: stable-v1.13
+  #       installPlanApproval: Manual
+  #       name: openshift-cert-manager-operator
+  #       namespace: cert-manager-operator
+  #       source: redhat-operators
+  #       sourceNamespace: openshift-marketplace
+  #     operatorGroups:
+  #     - name: cert-manager-operator
+  #       createNamespace: true
+  #       targetOwnNamespace: true
+
+  # # Team POC
+  # - name: team-self-service
+  #   enabled: true
+  #   source: https://github.com/alessandrocaglio/self-service/helm-charts/team-root.git
+  #   source_path: .
+  #   source_ref: main
+  #   destination: openshift-gitops
+  #   values:
+  #     clusterName: demo
+  #     region: 1
+  #     values_git_group: https://github.com/alessandrocaglio/openshift-template/self-service/ocp-pay-dev-mh/teams
+  #     teams:
+  #     - name: demo
+

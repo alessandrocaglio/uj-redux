@@ -8,18 +8,25 @@ applications:
     enabled: true
     source_path: "."
     helm_values:
-      - ubiquitous-journey/values-tooling-demo.yaml
+      - ubiquitous-journey/demo/values-tooling.yaml
 
   # Operators
-  - name: uj-operators
+  - name: uj-sm3-operators
     enabled: true
     source_path: "."
     helm_values:
-      - ubiquitous-journey/values-operators-demo.yaml      
+      - ubiquitous-journey/demo/values-servicemesh-operators.yaml      
+
+  # Operators
+  - name: uj-rhcl-operators
+    enabled: true
+    source_path: "."
+    helm_values:
+      - ubiquitous-journey/demo/values-rhcl-operators.yaml   
 
   # Applications
   - name: uj-applications
     enabled: true
     source_path: "."
     helm_values:
-      - ubiquitous-journey/values-applications-demo.yaml      
+      - ubiquitous-journey/values-applications.yaml      
