@@ -22,7 +22,7 @@ applications:
 
     # Kiali
   - name: kiali
-    enabled: true
+    enabled: false
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
