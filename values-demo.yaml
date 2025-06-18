@@ -1,0 +1,12 @@
+source: https://github.com/alessandrocaglio/uj-redux.git
+team: openshift
+release: gitops
+
+applications:
+  # Tooling
+  - name: ubiquitous-journey
+    enabled: true
+    source_path: "."
+    helm_values:
+      - ubiquitous-journey/values-tooling-demo.yaml
+

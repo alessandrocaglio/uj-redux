@@ -1,0 +1,59 @@
+ignoreHelmHooks: false
+
+#  if using the rh-gitops operator and you want to change the location for the ArgoCD instance to be deployed to:
+# It's defaulted to labs-ci-cd on the chart anyways
+namespaces:
+ - labs-ci-cd
+
+# example
+secrets:
+  - name: git-auth
+    username: 'gitlabuser'
+    password: 'gitlabadmin@123'
+    sshPrivateKey: ''
+
+argocd_cr:
+  initialRepositories: |
+    - url: https://gitlab.alpha.internal/openshift/ubiquitous-journey.git
+      type: git
+      passwordSecret:
+        key: password
+        name: git-auth
+      usernameSecret:
+        key: username
+        name: git-auth
+      insecure: true
+    - url: https://gitlab.alpha.internal/openshift/gitops-catalogue.git
+      type: git
+      passwordSecret:
+        key: password
+        name: git-auth
+      usernameSecret:
+        key: username
+        name: git-auth
+      insecure: true
+    - name: ubiquitous-journey
+      url: https://github.com/rht-labs/ubiquitous-journey.git
+    - name: redhat-cop
+      type: helm
+      url: https://redhat-cop.github.io/helm-charts
+    - url: https://gitlab.alpha.internal/openshift/user-management.git
+      type: git
+      passwordSecret:
+        key: password
+        name: git-auth
+      usernameSecret:
+        key: username
+        name: git-auth
+      insecure: true
+
+
+  # repositoryCredentials: |
+  #   - url: http://gitlab-ce.gitlab.svc.cluster.local:80
+  #     type: git
+  #     passwordSecret:
+  #       key: password
+  #       name: git-auth
+  #     usernameSecret:
+  #       key: username
+  #       name: git-auth
