@@ -4,9 +4,22 @@ release: gitops
 
 applications:
   # Tooling
-  - name: ubiquitous-journey
+  - name: uj-tooling
     enabled: true
     source_path: "."
     helm_values:
       - ubiquitous-journey/values-tooling-demo.yaml
 
+  # Operators
+  - name: uj-operators
+    enabled: true
+    source_path: "."
+    helm_values:
+      - ubiquitous-journey/values-operators-demo.yaml      
+
+  # Applications
+  - name: uj-applications
+    enabled: true
+    source_path: "."
+    helm_values:
+      - ubiquitous-journey/values-applications-demo.yaml      

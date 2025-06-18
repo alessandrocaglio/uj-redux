@@ -3,37 +3,38 @@
 ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
-applications: []
-  #  # servicemesh
-  # - name: servicemeshoperator
-  #   enabled: true
-  #   source: https://gitlab.alpha.internal/openshift/redhat-cop.git
-  #   source_path: charts/operators-installer
-  #   source_ref: ptsb
-  #   destination: openshift-operators
-  #   values:
-  #     operators:
-  #     - channel: stable
-  #       installPlanApproval: Manual
-  #       name: servicemeshoperator
-  #       source: redhat-operators
-  #       sourceNamespace: openshift-marketplace
-  #       csv: servicemeshoperator.v2.6.3
+applications:
+   # servicemesh3
+  - name: servicemesh3
+    enabled: true
+    source: https://gitlab.alpha.internal/openshift/redhat-cop.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: servicemesh3
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: servicemesh3.v3.0.2
 
-  #   # Kiali
-  # - name: kiali-ossm
-  #   enabled: true
-  #   source: https://github.com/redhat-cop/helm-charts.git
-  #   source_path: charts/operators-installer
-  #   source_ref: main
-  #   destination: openshift-operators
-  #   values:
-  #     operators:
-  #     - channel: stable
-  #       installPlanApproval: Manual
-  #       name: kiali-ossm
-  #       source: redhat-operators
-  #       sourceNamespace: openshift-marketplace
+    # Kiali
+  - name: kiali
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Manual
+        name: kiali-ossm
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+        csv: kiali-ossm.v2.4.5
 
 
   # # cert-manager operator
