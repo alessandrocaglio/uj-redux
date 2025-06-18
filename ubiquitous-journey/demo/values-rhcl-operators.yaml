@@ -14,7 +14,7 @@ applications:
 
   # CONNECTIVITY LINK
   - name: rhcl
-    enabled: true
+    enabled: false
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
@@ -22,7 +22,7 @@ applications:
     values:
       operators:
       - channel: stable
-        installPlanApproval: Manual
+        installPlanApproval: Automatic
         name: rhcl-operator
         source: redhat-operators
         sourceNamespace: openshift-marketplace
