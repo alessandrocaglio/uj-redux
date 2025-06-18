@@ -5,8 +5,8 @@ ci_cd_namespace: &ci_cd gitops
 # App of applications list
 applications:
    # servicemesh3
-  - name: servicemesh3
-    enabled: false
+  - name: servicemeshoperator3
+    enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
@@ -14,15 +14,15 @@ applications:
     values:
       operators:
       - channel: stable
-        installPlanApproval: Automatic
-        name: servicemesh3
+        installPlanApproval: Manual
+        name: servicemeshoperator3
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        #csv: servicemesh3.v3.0.2
+        csv: servicemeshoperator3.v3.0.2
 
     # Kiali
   - name: kiali
-    enabled: false
+    enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
     source_ref: main
@@ -30,11 +30,11 @@ applications:
     values:
       operators:
       - channel: stable
-        installPlanApproval: Automatic
-        name: kiali-ossm
+        installPlanApproval: Manual
+        name: kiali-operator
         source: redhat-operators
         sourceNamespace: openshift-marketplace
-        #csv: kiali-ossm.v2.4.5
+        csv: kiali-operator.v2.4.5
 
 
   # # cert-manager operator
