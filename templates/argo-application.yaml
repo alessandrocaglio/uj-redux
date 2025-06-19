@@ -2,11 +2,14 @@
 {{- $release := .Values.release }}
 {{- $source := .Values.source }}
 {{- $team := .Values.team }}
+{{- $region := .Values.region }}
 {{- range $app := .Values.applications }}
 {{- if $app.source }}
 {{- $source = $app.source }}
 {{- end }}
-{{- if $app.enabled }}
+{{- $appEnabledValue := default false $app.enabled }}
+{{- $appEnabled := tpl (ternary (toString $appEnabledValue) $appEnabledValue (kindIs "bool" $appEnabledValue)) $ }}
+{{- if eq "true" $appEnabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -19,6 +22,9 @@ metadata:
   name: {{ $release }}-{{ .name }}
 {{- end }}
   labels:
+{{- if .labels }}
+{{- .labels | toYaml | nindent 4 }}
+{{- end }}
 {{- if .values }}
 {{- if .values.fullnameOverride }}
 {{- if contains .values.fullnameOverride .name }}
@@ -33,16 +39,37 @@ spec:
     namespace: {{ .destination | default (printf "%s-%s" $team $release) }}
     server: {{ .cluster_api | default "https://kubernetes.default.svc" }}
   project: {{ .project | default "default" }}
+
+{{- if $app.sources }}
+  sources:
+{{- if $region }}
+  ## REGION
+  {{- toYaml $app.sources | nindent 4 | replace "{{ $region }}" $region }}
+{{- else }}
+  ## ELSE REGION
+  {{- toYaml $app.sources | nindent 4 }}
+{{- end }}
+{{- else }}
   source:
-{{- if or .helm_values .values }}
+{{- if or .helm_values .values $region }}
     helm:
 {{- if .helm_values }}
       valueFiles:
+{{- if $region }}
+{{- toYaml .helm_values | nindent 8 | replace "{{ $region }}" $region }}
+{{- else }}
 {{- toYaml .helm_values | nindent 8 }}
 {{- end }}
-{{- if .values }}
+      ignoreMissingValueFiles: true
+{{- end }}
+{{- if or .values $region }}
       values: |
-{{- toYaml .values | nindent 8 }}
+{{- end }}
+{{- if .values }}
+{{- tpl (toYaml .values) $ | nindent 8 }}
+{{- end }}
+{{- if $region }}
+        region: {{ $region }}
 {{- end }}
 {{- end }}
     {{- if .source_path }}
@@ -53,6 +80,11 @@ spec:
     {{- if not .source_path }}
     chart: {{ .chart_name | default .name }}
     {{- end }}
+{{- end }}
+{{- if $app.syncPolicy}}
+  syncPolicy:
+  {{- toYaml $app.syncPolicy | nindent 4 }}
+{{- else }} 
   syncPolicy:
     automated:
       prune: {{ if .syncPolicy }} {{ .syncPolicy.automated.prune }} {{- else }} true {{- end }}
@@ -61,6 +93,15 @@ spec:
       - Validate=true
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
+{{- end }}
+{{- if $app.info }}
+  info:
+  {{- toYaml $app.info | nindent 4 }}
+{{- end }}
+{{- if $app.ignoreDifferences }}
+  ignoreDifferences:
+  {{- toYaml $app.ignoreDifferences | nindent 4 }}
+{{- else }}
   ignoreDifferences:
     - group: apps.openshift.io
       kind: DeploymentConfig
@@ -70,25 +111,17 @@ spec:
         - /spec/triggers/0/imageChangeParams/lastTriggeredImage
         - /spec/triggers/1/imageChangeParams/lastTriggeredImage
         - /spec/template/metadata/annotations/rollme
-    - group: apps
-      kind: Deployment
-      jsonPointers:
-        - /spec/replicas
-        - /spec/template/spec/containers/0/image
-        - /spec/template/spec/containers/1/image
     - group: build.openshift.io
       kind: BuildConfig
       jsonPointers:
         - /spec/triggers
-    - group: route.openshift.io
-      kind: Route
-      jsonPointers:
-        - /status/ingress
-        - /spec/host
     - group: integreatly.org
       kind: GrafanaDataSource
       jsonPointers:
         - /spec/datasources/0/secureJsonData/httpHeaderValue1
+    - kind: ServiceAccount
+      jsonPointers:
+        - /imagePullSecrets
     {{- if .ignore_differences }}
     {{- range $igDiffs := .ignore_differences }}
     - group: {{ $igDiffs.group }}
@@ -99,8 +132,13 @@ spec:
       {{- range $jsonPointer := $igDiffs.jsonPointers }} 
         - {{ $jsonPointer }}
       {{- end }}
+      jqPathExpressions: 
+      {{- range $jqPathExpression := $igDiffs.jqPathExpressions }} 
+        - {{ $jqPathExpression }}
+      {{- end }}
     {{- end }}
     {{- end }}
+  {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
