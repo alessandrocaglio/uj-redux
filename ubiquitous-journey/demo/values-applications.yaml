@@ -51,6 +51,4 @@ applications:
         include: 'bookinfo.yaml'
     - repoURL: https://github.com/alessandrocaglio/uj-redux.git
       targetRevision: main
-      path: manifests/sampleapps/bookinfo
-      directory:
-        include: 'bookinfo-gateway.yaml'
+      path: manifests/sampleapps/bookinfo/gateway

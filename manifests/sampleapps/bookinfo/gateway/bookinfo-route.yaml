@@ -1,0 +1,16 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: bookinfo-gateway
+  namespace: ale-apps-dev
+spec:
+  host: bookinfo-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  path: /
+  to:
+    kind: Service
+    name: bookinfo-gateway-istio
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
