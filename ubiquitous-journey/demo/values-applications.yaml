@@ -29,7 +29,7 @@ applications:
     - repoURL: https://github.com/alessandrocaglio/uj-redux.git
       path: manifests/sampleapps
       directory:
-        include: ale-apps-dev.yaml,sampleapps-istio-podmonitor.yaml
+        include: "{ale-apps-dev.yaml,sampleapps-istio-podmonitor.yaml}"
 
   - name: httpbin
     enabled: true
