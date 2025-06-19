@@ -4,6 +4,14 @@ ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
 applications: 
+  - name: httpbin
+    enabled: true
+    sources: 
+    - repoURL: https://github.com/istio/istio.git
+      path: samples/httpbin
+      directory:
+        include: 'httpbin.yaml'
+        
   - name: bookinfo
     enabled: true
     sources: 
