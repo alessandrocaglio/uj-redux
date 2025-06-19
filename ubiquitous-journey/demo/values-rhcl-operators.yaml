@@ -6,7 +6,7 @@ ci_cd_namespace: &ci_cd gitops
 applications:
   # GATEWAY API v1.1.0 CRDs
   - name: getway-api
-    enabled: true
+    enabled: false
     source: https://github.com/kubernetes-sigs/gateway-api.git
     source_path: config/crd
     source_ref: v1.1.0
