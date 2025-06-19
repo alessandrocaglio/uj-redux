@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ale-servicemesh-dev
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"
+---
+apiVersion: operator.istio.io/v1alpha1
+kind: Istio
+metadata:
+  name: ale-servicemesh-dev
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"
+spec:
+  namespace: ale-servicemesh-dev
+  updateStrategy:
+    inactiveRevisionDeletionGracePeriodSeconds: 30
+    type: InPlace
+  version: v1.24.5  
+  values:
+    global:
+      # Used to locate istiod.
+      istioNamespace: ale-servicemesh-dev
+    meshConfig:
+      accessLogFile: /dev/stdout
+      enableAutoMtls: true
+      enablePrometheusMerge: true
+      enableTracing: true
+      discoverySelectors:
+        - matchLabels:
+            servicemesh3: ale-servicemesh-dev
+    pilot:
+      # Lowered requests
+      resources:
+        requests:
+          cpu: 100m
+          memory: 1024Mi

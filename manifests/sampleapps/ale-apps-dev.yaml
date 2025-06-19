@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ale-apps-dev
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"  
+  labels:
+    servicemesh3: ale-servicemesh-dev
+---    
