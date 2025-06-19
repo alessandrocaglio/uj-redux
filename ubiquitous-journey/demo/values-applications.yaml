@@ -6,6 +6,7 @@ ci_cd_namespace: &ci_cd gitops
 applications: 
   - name: httpbin
     enabled: true
+    destination: ale-apps-dev
     sources: 
     - repoURL: https://github.com/istio/istio.git
       path: samples/httpbin
@@ -14,6 +15,7 @@ applications:
         
   - name: bookinfo
     enabled: true
+    destination: ale-apps-dev
     sources: 
     - repoURL: https://github.com/istio/istio.git
       targetRevision: master
