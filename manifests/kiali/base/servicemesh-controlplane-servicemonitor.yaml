@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: istiod-monitor
-  namespace: ale-servicemesh-dev
+  namespace: placeholder
 spec:
   targetLabels:
   - app

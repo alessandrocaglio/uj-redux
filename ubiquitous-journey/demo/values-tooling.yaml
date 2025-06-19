@@ -3,4 +3,11 @@
 ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
-applications: []
+applications: 
+  - name: kiali
+    enabled: true
+    destination: ale-servicemesh-dev
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      targetRevision: main
+      path: manifests/kiali/overlays/ale-servicemesh-dev

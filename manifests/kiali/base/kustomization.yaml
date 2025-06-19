@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- kiali-monitoring-rbac-rolebinding.yaml
+- kiali.yaml
+- servicemesh-controlplane-servicemonitor.yaml
+- servicemesh-controlplane-podmonitor.yaml
+

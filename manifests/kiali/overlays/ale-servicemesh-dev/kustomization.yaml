@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+namespace: ale-servicemesh-dev
+
+patches:
+  - target:
+      kind: Kiali
+      name: kiali-user-workload-monitoring
+    patch: |-
+      - op: replace
+        path: /spec/istio_namespace
+        value: ale-servicemesh-dev
+      - op: replace
+        path: /spec/deployment/discovery_selectors/default/0/matchLabels/servicemesh3
+        value: ale-servicemesh-dev
+  - target:
+      kind: ClusterRoleBinding
+      name: kiali-monitoring-rbac
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: ale-servicemesh-dev
+  - target:
+      kind: PodMonitor
+      name: istio-proxies-monitor
+    patch: |-
+      - op: replace
+        path: /spec/podMetricsEndpoints/0/relabelings/7/replacement
+        value: "ale-servicemesh-dev"

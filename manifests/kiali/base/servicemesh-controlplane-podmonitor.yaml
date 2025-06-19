@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: istio-proxies-monitor
-  namespace: ale-servicemesh-dev
+  namespace: placeholder
 spec:
   selector:
     matchExpressions:
@@ -43,5 +43,5 @@ spec:
       action: replace
       targetLabel: namespace
     - action: replace
-      replacement: "ale-servicemesh-dev" 
+      replacement: "placeholder" 
       targetLabel: mesh_id
