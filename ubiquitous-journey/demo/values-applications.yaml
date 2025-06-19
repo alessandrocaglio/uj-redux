@@ -49,8 +49,8 @@ applications:
       path: samples/bookinfo/platform/kube
       directory:
         include: 'bookinfo.yaml'
-    - repoURL: https://github.com/openshift-service-mesh/istio.git
-      targetRevision: release-1.24
-      path: samples/bookinfo/gateway-api
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      targetRevision: main
+      path: manifests/sampleapps/bookinfo
       directory:
         include: 'bookinfo-gateway.yaml'
