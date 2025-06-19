@@ -4,6 +4,33 @@ ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
 applications: 
+  - name: istio-cni
+    enabled: true
+    destination: istio-cni
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      path: manifests/sm3
+      directory:
+        include: 'istio-cni.yaml'
+
+  - name: ale-servicemesh-dev
+    enabled: true
+    destination: ale-servicemesh-dev
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      path: manifests/sm3
+      directory:
+        include: ale-servicemesh-dev.yaml
+
+  - name: ale-apps-dev
+    enabled: true
+    destination: ale-apps-dev
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      path: manifests/sampleapps
+      directory:
+        include: ale-apps-dev.yaml
+
   - name: httpbin
     enabled: true
     destination: ale-apps-dev
