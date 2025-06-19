@@ -21,7 +21,7 @@ applications:
         #csv: servicemeshoperator3.v3.0.2
 
   # Kiali
-  - name: kiali
+  - name: kialioperator
     enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/operators-installer
