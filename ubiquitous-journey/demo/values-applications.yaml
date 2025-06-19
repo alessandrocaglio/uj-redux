@@ -44,17 +44,13 @@ applications:
     enabled: true
     destination: ale-apps-dev
     sources: 
-    - repoURL: https://github.com/istio/istio.git
-      targetRevision: master
+    - repoURL: https://github.com/openshift-service-mesh/istio.git
+      targetRevision: release-1.24
       path: samples/bookinfo/platform/kube
       directory:
         include: 'bookinfo.yaml'
-    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
-    #   targetRevision: main
-    #   path: bookinfo-ingress/overlays/test
-    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
-    #   targetRevision: main
-    #   path: bookinfo-ingress/overlays/gateways      
-    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
-    #   targetRevision: main
-    #   path: bookinfo-mtls-ingress-test
+    - repoURL: https://github.com/openshift-service-mesh/istio.git
+      targetRevision: release-1.24
+      path: samples/bookinfo/gateway-api
+      directory:
+        include: 'bookinfo-gateway.yaml'
