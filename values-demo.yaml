@@ -29,4 +29,4 @@ applications:
     enabled: true
     source_path: "."
     helm_values:
-      - ubiquitous-journey/demo/values-applications.yaml      
+      - ubiquitous-journey/demo/values-applications.yaml
