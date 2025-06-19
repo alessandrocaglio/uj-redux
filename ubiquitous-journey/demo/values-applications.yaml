@@ -3,4 +3,21 @@
 ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
-applications: []
+applications: 
+  - name: bookinfo
+    enabled: true
+    sources: 
+    - repoURL: https://github.com/istio/istio.git
+      targetRevision: master
+      path: samples/bookinfo/platform/kube
+      directory:
+        include: 'bookinfo.yaml'
+    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
+    #   targetRevision: main
+    #   path: bookinfo-ingress/overlays/test
+    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
+    #   targetRevision: main
+    #   path: bookinfo-ingress/overlays/gateways      
+    # - repoURL: https://gitlab.alpha.internal/sandbox/misc/resources.git
+    #   targetRevision: main
+    #   path: bookinfo-mtls-ingress-test
