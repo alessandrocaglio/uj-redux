@@ -1,3 +1,4 @@
+---
 kind: OpenTelemetryCollector
 apiVersion: opentelemetry.io/v1beta1
 metadata:
@@ -26,3 +27,14 @@ spec:
             - otlp
           receivers:
             - otlp
+---
+apiVersion: telemetry.istio.io/v1
+kind: Telemetry
+metadata:
+  name: otel
+  namespace: ale-servicemesh-dev
+spec:
+  tracing:
+    - providers:
+        - name: otel
+      randomSamplingPercentage: 100            
