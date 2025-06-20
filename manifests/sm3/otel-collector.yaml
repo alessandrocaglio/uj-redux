@@ -9,19 +9,37 @@ spec:
     metrics: {}
   deploymentUpdateStrategy: {}
   config:
+    extensions:
+      bearertokenauth:
+        filename: "/var/run/secrets/kubernetes.io/serviceaccount/token"
     exporters:
       otlp:
-        endpoint: 'tempo-tempo-gateway.tempo.svc.cluster.local:8090'
+        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
         tls:
           insecure: false
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
         auth:
           authenticator: bearertokenauth
         headers:
-          X-Scope-OrgID: default
-    extensions:
-      bearertokenauth:
-        filename: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+          X-Scope-OrgID: "default"
+      otlp/default:
+        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
+        tls:
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+        auth:
+          authenticator: bearertokenauth
+        headers:
+          X-Scope-OrgID: "default"
+      otlphttp/default:
+        endpoint: https://tempo-tempo-gateway.tempo.svc.cluster.local:8080/api/traces/v1/default
+        tls:
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+        auth:
+          authenticator: bearertokenauth
+        headers:
+          X-Scope-OrgID: "default"
     receivers:
       otlp:
         protocols:
@@ -34,6 +52,7 @@ spec:
         traces:
           exporters:
             - otlp
+            - otlp/default
           receivers:
             - otlp
 ---
