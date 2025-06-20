@@ -26,16 +26,16 @@ subjects:
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
     name: system:authenticated
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: tempostack-traces-reader-kiali
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: tempostack-traces-reader
-subjects:
-  - kind: ServiceAccount
-    name: kiali-service-account
-    namespace: ale-servicemesh-dev
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: tempostack-traces-reader-kiali
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: tempostack-traces-reader
+# subjects:
+#   - kind: ServiceAccount
+#     name: kiali-service-account
+#     namespace: ale-servicemesh-dev

@@ -17,6 +17,8 @@ spec:
   auth:
     strategy: openshift
   external_services:
+    grafana:
+      enabled: false
     prometheus:
       auth:
         type: bearer
@@ -25,16 +27,17 @@ spec:
         enabled: true
       url: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091
     tracing:
-      enabled: true 
+      enabled: true
+      namespace_selector: true
       provider: tempo 
-      use_grpc: false
+      tempo_config:
+        url_format: "jaeger"
+      auth: 
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+        type: bearer
+        use_kiali_token: true
+        insecure_skip_verify: false
       internal_url: https://tempo-tempo-gateway.tempo.svc.cluster.local:8080/api/traces/v1/default/tempo 
       external_url: https://tempo-tempo-gateway-tempo.apps.cluster-s7pb4.dynamic.redhatworkshops.io/api/traces/v1/default/search
       health_check_url: https://tempo-tempo-gateway-tempo.apps.cluster-s7pb4.dynamic.redhatworkshops.io/api/traces/v1/default/tempo/api/echo
-      auth: 
-        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
-        insecure_skip_verify: false
-        type: bearer
-        use_kiali_token: true
-      tempo_config:
-         url_format: "jaeger"
+      use_grpc: false
