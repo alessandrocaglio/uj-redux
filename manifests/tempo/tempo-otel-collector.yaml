@@ -11,15 +11,15 @@ spec:
       bearertokenauth: 
         filename: "/var/run/secrets/kubernetes.io/serviceaccount/token" 
     exporters:
-      otlp:
-        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
-        tls:
-          insecure: false
-          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
-        auth:
-          authenticator: bearertokenauth
-        headers:
-          X-Scope-OrgID: "default"
+      # otlp:
+      #   endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
+      #   tls:
+      #     insecure: false
+      #     ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+      #   auth:
+      #     authenticator: bearertokenauth
+      #   headers:
+      #     X-Scope-OrgID: "default"
       otlp/default:
         endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
         tls:
@@ -49,7 +49,7 @@ spec:
       pipelines:
         traces:
           exporters: 
-            - oltp
+            # - oltp
             - otlp/default
           receivers:
             - otlp          
