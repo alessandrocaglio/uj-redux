@@ -1,34 +1,55 @@
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
-  name: otel
+  name: cluster-collector
   namespace: tempo
 spec:
   mode: deployment
-  config:
-    receivers: 
+  serviceAccount: otel-collector 
+  config: 
+    extensions:
+      bearertokenauth: 
+        filename: "/var/run/secrets/kubernetes.io/serviceaccount/token" 
+    exporters:
+      otlp:
+        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
+        tls:
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+        auth:
+          authenticator: bearertokenauth
+        headers:
+          X-Scope-OrgID: "default"
+      otlp/default:
+        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
+        tls:
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+        auth:
+          authenticator: bearertokenauth
+        headers:
+          X-Scope-OrgID: "default"
+      otlphttp/default:
+        endpoint: https://tempo-tempo-gateway.tempo.svc.cluster.local:8080/api/traces/v1/default
+        tls:
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+        auth:
+          authenticator: bearertokenauth
+        headers:
+          X-Scope-OrgID: "default"
+    receivers:
       otlp:
         protocols:
           grpc:
-          http:
-      jaeger:
-        protocols:
-          grpc: {}
-          thrift_binary: {}
-          thrift_compact: {}
-          thrift_http: {}
-      zipkin: {}
-    processors: 
-      batch: {}
-      memory_limiter:
-        check_interval: 1s
-        limit_percentage: 50
-        spike_limit_percentage: 30
-    exporters: 
-      debug: {}
+            endpoint: '0.0.0.0:4317'
+          http: {}          
     service:
+      extensions: [bearertokenauth]
       pipelines:
         traces:
-          receivers: [otlp,jaeger,zipkin]
-          processors: [memory_limiter,batch]
-          exporters: [debug]
+          exporters: 
+            - oltp
+            - otlp/default
+          receivers:
+            - otlp          
