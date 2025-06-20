@@ -13,7 +13,7 @@ spec:
       #   - key: my-mesh
       #     operator: Exists  
       - matchLabels:
-          servicemesh3: placeholder     
+          servicemesh3: placeholder
   auth:
     strategy: openshift
   external_services:
@@ -24,3 +24,17 @@ spec:
       thanos_proxy:
         enabled: true
       url: https://thanos-querier.openshift-monitoring.svc.cluster.local:9091
+    tracing:
+      enabled: true 
+      provider: tempo 
+      use_grpc: false
+      internal_url: https://tempo-sample-gateway.tempo.svc.cluster.local:8080/api/traces/v1/default/tempo 
+      external_url: https://tempo-sample-gateway-tempo.apps-crc.testing/api/traces/v1/default/search 
+      health_check_url: https://tempo-sample-gateway-tempo.apps-crc.testing/api/traces/v1/north/tempo/api/echo 
+      auth: 
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+        insecure_skip_verify: false
+        type: bearer
+        use_kiali_token: true
+      tempo_config:
+         url_format: "jaeger"       
