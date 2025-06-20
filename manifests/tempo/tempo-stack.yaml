@@ -1,0 +1,27 @@
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack 
+metadata:
+  name: tempo
+  namespace: tempo
+spec:
+  storage: 
+    secret: 
+      name: tempo-storage-secret
+      type: s3
+  storageSize: 5Gi 
+  resources:
+    total:
+      limits:
+        memory: 2Gi
+        cpu: 2000m
+  tenants:
+    mode: openshift 
+    authentication: 
+      - tenantName: ale-dev 
+        tenantId: "ale-dev" 
+  template:
+    gateway:
+      enabled: true 
+    queryFrontend:
+      jaegerQuery:
+        enabled: true 

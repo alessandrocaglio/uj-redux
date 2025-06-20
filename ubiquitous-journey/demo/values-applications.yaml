@@ -52,3 +52,12 @@ applications:
     - repoURL: https://github.com/alessandrocaglio/uj-redux.git
       targetRevision: main
       path: manifests/sampleapps/bookinfo/gateway
+
+  - name: tempo
+    enabled: true
+    destination: tempo
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      path: manifests/tempo
+      directory:
+        exclude: 'objectstoraget/*'

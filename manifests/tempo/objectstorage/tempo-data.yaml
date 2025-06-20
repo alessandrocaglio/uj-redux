@@ -1,0 +1,11 @@
+# tempo-obc.yaml
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: tempo-data
+  namespace: tempo
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"  
+spec:
+  generateBucketName: tempo-data
+  storageClassName: openshift-storage.noobaa.io
