@@ -14,8 +14,8 @@ spec:
       limits:
         memory: 2Gi
         cpu: 2000m
-  # tenants:
-  #   mode: openshift 
+  tenants:
+    mode: openshift 
   #   authentication: 
   #     - tenantName: ale-dev 
   #       tenantId: "ale-dev" 
