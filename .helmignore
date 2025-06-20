@@ -1,4 +1,6 @@
 # so we dont include these in our chart secret
+charts/
+manifests/
 docs/
 tekton/
 docs/

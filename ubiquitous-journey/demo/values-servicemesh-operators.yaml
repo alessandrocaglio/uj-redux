@@ -36,4 +36,36 @@ applications:
         sourceNamespace: openshift-marketplace
         #csv: kiali-operator.v2.4.5
 
+  # Tempo Operator
+  - name: tempooperator
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Automatic
+        name: tempo-product
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorGroups:
+      - name: openshift-tempo-operator
 
+  # OpenTelemetry Operator
+  - name: opentelemetryoperator
+    enabled: true
+    source: https://github.com/redhat-cop/helm-charts.git
+    source_path: charts/operators-installer
+    source_ref: main
+    destination: openshift-operators
+    values:
+      operators:
+      - channel: stable
+        installPlanApproval: Automatic
+        name: opentelemetry-product
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorGroups:
+      - name: openshift-opentelemetry-operator
