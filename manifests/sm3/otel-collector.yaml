@@ -11,7 +11,7 @@ spec:
   config:
     exporters:
       otlp:
-        endpoint: 'tempo-tempo-gateway.tempo.svc.cluster.local:8080'
+        endpoint: 'tempo-tempo-gateway.tempo.svc.cluster.local:8090'
         tls:
           insecure: false
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
