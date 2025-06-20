@@ -20,7 +20,7 @@ applications:
     - repoURL: https://github.com/alessandrocaglio/uj-redux.git
       path: manifests/sm3
       directory:
-        include: ale-servicemesh-dev.yaml
+        include: "{otel-collector.yamlale-servicemesh-dev.yaml}"
 
   - name: ale-apps-dev
     enabled: true
