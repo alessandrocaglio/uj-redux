@@ -1,11 +1,11 @@
 apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
-  name: cluster-collector
+  name: otel
   namespace: tempo
 spec:
-  mode: deployment
-  serviceAccount: otel-collector 
+  # mode: deployment
+  # serviceAccount: otel-collector 
   config: 
     extensions:
       bearertokenauth: 
