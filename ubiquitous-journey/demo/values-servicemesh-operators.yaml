@@ -52,6 +52,7 @@ applications:
         sourceNamespace: openshift-marketplace
       operatorGroups:
       - name: openshift-tempo-operator
+        createNamespace: true
 
   # OpenTelemetry Operator
   - name: opentelemetryoperator
@@ -69,3 +70,4 @@ applications:
         sourceNamespace: openshift-marketplace
       operatorGroups:
       - name: openshift-opentelemetry-operator
+        createNamespace: true
