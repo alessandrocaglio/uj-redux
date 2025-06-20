@@ -26,10 +26,16 @@ spec:
       accessLogFile: /dev/stdout
       enableAutoMtls: true
       enablePrometheusMerge: true
-      enableTracing: true
       discoverySelectors:
         - matchLabels:
             servicemesh3: ale-servicemesh-dev
+      # Tracing
+      enableTracing: true
+      extensionProviders:
+      - name: otel
+        opentelemetry:
+          port: 4317
+          service: otel-collector.ale-servicemesh-dev.svc.cluster.local                
     pilot:
       # Lowered requests
       resources:
