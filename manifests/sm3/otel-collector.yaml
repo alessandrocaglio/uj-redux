@@ -19,7 +19,7 @@ spec:
           authenticator: bearertokenauth
         headers:
           X-Scope-OrgID: default
-    extenstions:
+    extensions:
       bearertokenauth:
         filename: "/var/run/secrets/kubernetes.io/serviceaccount/token"
     receivers:
