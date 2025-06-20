@@ -13,12 +13,14 @@ spec:
     total:
       limits:
         memory: 2Gi
-        cpu: 2000m
+        cpu: '2'
   tenants:
     mode: openshift 
     authentication:
       - tenantName: default
         tenantId: default
+      - tenantName: ale-dev
+        tenantId: ale-dev      
   template:
     gateway:
       enabled: true 

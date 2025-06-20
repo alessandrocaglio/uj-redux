@@ -13,9 +13,13 @@ spec:
       otlp:
         endpoint: 'tempo-sample-distributor.tempo.svc.cluster.local:4317'
         tls:
-          insecure: true
+          insecure: false
+          ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
         headers:
           X-Scope-OrgID: default
+    extenstions:
+      bearertokenauth:
+        filename: "/var/run/secrets/kubernetes.io/serviceaccount/token"
     receivers:
       otlp:
         protocols:
@@ -23,6 +27,7 @@ spec:
             endpoint: '0.0.0.0:4317'
           http: {}
     service:
+      extensions: [bearertokenauth]
       pipelines:
         traces:
           exporters:
