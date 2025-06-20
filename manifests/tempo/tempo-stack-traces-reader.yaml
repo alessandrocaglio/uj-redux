@@ -30,7 +30,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: tempostack-traces-reader
+  name: tempostack-traces-reader-kiali
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
