@@ -14,6 +14,8 @@ spec:
         endpoint: 'tempo-sample-distributor.tempo.svc.cluster.local:4317'
         tls:
           insecure: true
+        headers:
+          X-Scope-OrgID: default
     receivers:
       otlp:
         protocols:

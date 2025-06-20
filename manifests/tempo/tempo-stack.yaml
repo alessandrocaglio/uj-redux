@@ -16,9 +16,9 @@ spec:
         cpu: 2000m
   tenants:
     mode: openshift 
-  #   authentication: 
-  #     - tenantName: ale-dev 
-  #       tenantId: "ale-dev" 
+    authentication:
+      - tenantName: default
+        tenantId: default
   template:
     gateway:
       enabled: true 
