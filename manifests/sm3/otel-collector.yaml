@@ -16,7 +16,7 @@ spec:
       debug:
         verbosity: detailed    
       otlp:
-        endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
+        endpoint: tempo-tempo-distributor.tempo.svc.cluster.local:4317
         tls:
           insecure: true
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
