@@ -11,6 +11,8 @@ spec:
       bearertokenauth: 
         filename: "/var/run/secrets/kubernetes.io/serviceaccount/token" 
     exporters:
+      debug:
+        verbosity: detailed
       # otlp:
       #   endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
       #   tls:
@@ -50,6 +52,7 @@ spec:
         traces:
           exporters: 
             # - oltp
+            - debug
             - otlp/default
           receivers:
             - otlp          
