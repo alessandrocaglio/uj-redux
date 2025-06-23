@@ -23,7 +23,7 @@ spec:
       otlp/default:
         endpoint: tempo-tempo-gateway.tempo.svc.cluster.local:8090
         tls:
-          insecure: false
+          insecure: true
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
         auth:
           authenticator: bearertokenauth
@@ -32,7 +32,7 @@ spec:
       otlphttp/default:
         endpoint: https://tempo-tempo-gateway.tempo.svc.cluster.local:8080/api/traces/v1/default
         tls:
-          insecure: false
+          insecure: true
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
         auth:
           authenticator: bearertokenauth
