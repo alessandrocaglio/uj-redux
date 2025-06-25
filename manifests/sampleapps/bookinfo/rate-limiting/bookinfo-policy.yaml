@@ -1,0 +1,17 @@
+apiVersion: kuadrant.io/v1
+kind: RateLimitPolicy
+metadata:
+  name: bookinfo-rlp
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: bookinfo
+  defaults:
+    when:
+      - predicate: "'my-rl-header' in request.headers"
+    limits:
+      "low-limit":
+        rates:
+          - limit: 5
+            window: 10s
