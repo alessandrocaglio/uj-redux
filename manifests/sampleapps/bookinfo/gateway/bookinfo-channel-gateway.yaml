@@ -9,6 +9,27 @@ metadata:
     istio.io/rev: ale-servicemesh-dev
     servicemesh3: ale-servicemesh-dev
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: bookinfo-ch-cert
+  namespace: ale-gw-dev
+spec:
+  secretName: bookinfo-ch-tls
+  issuerRef:
+    name: letsencrypt-prod       # Replace with your Issuer/ClusterIssuer
+    kind: ClusterIssuer          # Or Issuer if namespaced
+    group: cert-manager.io
+  duration: 2160h               # 90 days
+  renewBefore: 360h             # 15 days before expiration
+  dnsNames:
+  - bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  usages:
+  - server auth
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
