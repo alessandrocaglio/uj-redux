@@ -29,11 +29,6 @@ spec:
     size: 2048
   usages:
   - server auth
-  solvers:
-  - http01:
-      ingress:
-        class: openshift-default
-
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
