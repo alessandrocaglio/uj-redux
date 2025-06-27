@@ -71,17 +71,36 @@ spec:
   port:
     targetPort: http
   wildcardPolicy: None
+# ---
+# apiVersion: kuadrant.io/v1
+# kind: RateLimitPolicy
+# metadata:
+#   name: bookinfo-ch-rlp
+#   namespace: ale-apps-dev
+# spec:
+#   targetRef:
+#     group: gateway.networking.k8s.io
+#     kind: HTTPRoute
+#     name: bookinfo-ch
+#   defaults:
+#     when:
+#       - predicate: "'my-rl-header' in request.headers"
+#     limits:
+#       "low-limit":
+#         rates:
+#           - limit: 5
+#             window: 10s
 ---
 apiVersion: kuadrant.io/v1
 kind: RateLimitPolicy
 metadata:
   name: bookinfo-ch-rlp
-  namespace: ale-apps-dev
+  namespace: ale-gw-dev
 spec:
   targetRef:
     group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: bookinfo-ch
+    kind: Gateway
+    name: bookinfo-ch-gateway
   defaults:
     when:
       - predicate: "'my-rl-header' in request.headers"
@@ -89,4 +108,4 @@ spec:
       "low-limit":
         rates:
           - limit: 5
-            window: 10s
+            window: 10s            
