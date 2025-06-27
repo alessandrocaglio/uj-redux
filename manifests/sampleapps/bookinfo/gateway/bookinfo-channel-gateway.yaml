@@ -98,7 +98,6 @@ metadata:
   namespace: ale-gw-dev
 spec:
   host: bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
-  path: /
   to:
     kind: Service
     name: bookinfo-ch-gateway-istio
@@ -108,7 +107,7 @@ spec:
   wildcardPolicy: None
   tls:
     insecureEdgeTerminationPolicy: None
-    termination: passthrough  
+    termination: passthrough
 # ---
 # apiVersion: kuadrant.io/v1
 # kind: RateLimitPolicy
