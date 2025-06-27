@@ -23,7 +23,8 @@ spec:
   duration: 2160h               # 90 days
   renewBefore: 360h             # 15 days before expiration
   dnsNames:
-  - bookinfo-chs.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  - bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  # - bookinfo-chs.apps.cluster-s7pb4.dynamic.redhatworkshops.io
   privateKey:
     algorithm: RSA
     size: 2048
@@ -46,6 +47,19 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+  - name: https
+    port: 443
+    protocol: HTTPS
+    hostname: bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        name: bookinfo-ch-tls
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
