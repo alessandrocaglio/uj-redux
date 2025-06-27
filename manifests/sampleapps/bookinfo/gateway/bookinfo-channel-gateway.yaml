@@ -23,7 +23,7 @@ spec:
   duration: 2160h               # 90 days
   renewBefore: 360h             # 15 days before expiration
   dnsNames:
-  - bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  - bookinfo-chs.apps.cluster-s7pb4.dynamic.redhatworkshops.io
   privateKey:
     algorithm: RSA
     size: 2048
