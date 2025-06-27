@@ -76,7 +76,7 @@ apiVersion: kuadrant.io/v1
 kind: RateLimitPolicy
 metadata:
   name: bookinfo-ch-rlp
-  namespace: ale-gw-dev
+  namespace: ale-apps-dev
 spec:
   targetRef:
     group: gateway.networking.k8s.io
