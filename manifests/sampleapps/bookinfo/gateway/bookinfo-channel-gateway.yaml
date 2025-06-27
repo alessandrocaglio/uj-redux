@@ -1,0 +1,90 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ale-gw-dev
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"  
+  labels:
+    istio.io/rev: ale-servicemesh-dev
+    servicemesh3: ale-servicemesh-dev
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: bookinfo-ch-gateway
+  namespace: ale-gw-dev
+  annotations:
+    networking.istio.io/service-type: ClusterIP
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bookinfo-ch
+spec:
+  parentRefs:
+  - name: bookinfo-ch-gateway
+    namespace: ale-gw-dev
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /productpage
+    - path:
+        type: PathPrefix
+        value: /static
+    - path:
+        type: Exact
+        value: /login
+    - path:
+        type: Exact
+        value: /logout
+    - path:
+        type: PathPrefix
+        value: /api/v1/products
+    backendRefs:
+    - name: productpage
+      port: 9080
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: bookinfo-gateway
+  namespace: ale-gw-dev
+spec:
+  host: bookinfo-ch-ale-apps-dev.apps.cluster-s7pb4.dynamic.redhatworkshops.io
+  path: /
+  to:
+    kind: Service
+    name: bookinfo-ch-gateway-istio
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+---
+apiVersion: kuadrant.io/v1
+kind: RateLimitPolicy
+metadata:
+  name: bookinfo-ch-rlp
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: bookinfo-ch
+  defaults:
+    when:
+      - predicate: "'my-rl-header' in request.headers"
+    limits:
+      "low-limit":
+        rates:
+          - limit: 5
+            window: 10s
