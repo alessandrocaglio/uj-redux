@@ -4,6 +4,13 @@ ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
 applications: 
+  - name: rhcl-kuadrant
+    enabled: true
+    destination: kuadrant-system
+    sources: 
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      path: manifests/rhcl
+
   - name: istio-cni
     enabled: true
     destination: istio-cni
