@@ -59,7 +59,10 @@ applications:
     - repoURL: https://github.com/alessandrocaglio/uj-redux.git
       targetRevision: main
       path: manifests/sampleapps/bookinfo/gateway
-
+    - repoURL: https://github.com/alessandrocaglio/uj-redux.git
+      targetRevision: main
+      path: manifests/sampleapps/bookinfo/rate-limiting
+      
   - name: tempo
     enabled: true
     destination: tempo
