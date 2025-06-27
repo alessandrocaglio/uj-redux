@@ -4,12 +4,12 @@ ci_cd_namespace: &ci_cd gitops
 
 # App of applications list
 applications:
-  # GATEWAY API v1.1.0 CRDs
+  # GATEWAY API v1.3.0 CRDs
   - name: getway-api
     enabled: true
     source: https://github.com/kubernetes-sigs/gateway-api.git
     source_path: config/crd
-    source_ref: v1.0.0
+    source_ref: v1.3.0
     destination: openshift-operators
 
   # CONNECTIVITY LINK
@@ -21,12 +21,12 @@ applications:
     destination: openshift-operators
     values:
       operators:
-      - channel: stable
-        installPlanApproval: Automatic
-        name: rhcl-operator
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-        #csv: rhcl-operator.v1.0.2
+        - channel: stable
+          installPlanApproval: Automatic
+          name: rhcl-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+          #csv: rhcl-operator.v1.0.2
 
   # NOT NEEDED APPARENTLY
   #
@@ -60,7 +60,7 @@ applications:
   #       name: dns-operator-stable-redhat-operators-openshift-marketplace
   #       source: redhat-operators
   #       sourceNamespace: openshift-marketplace
-  #       #csv: dns-operator.v1.1.0 
+  #       #csv: dns-operator.v1.1.0
 
   # # LIMITADOR OPERATOR
   # - name: limitador-operator
@@ -77,4 +77,3 @@ applications:
   #       source: redhat-operators
   #       sourceNamespace: openshift-marketplace
   #       #csv: limitador-operator.v1.1.0
-
