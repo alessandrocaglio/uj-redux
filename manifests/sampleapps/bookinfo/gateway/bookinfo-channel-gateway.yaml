@@ -103,7 +103,7 @@ spec:
     name: bookinfo-ch-gateway-istio
     weight: 100
   port:
-    targetPort: http
+    targetPort: https
   wildcardPolicy: None
   tls:
     insecureEdgeTerminationPolicy: None
